@@ -1,6 +1,21 @@
 import React, { useState, useRef, useEffect } from 'react'
 
+const bannerText = `
+ @@@@@@    @@@@@@   @@@  @@@   @@@@@@@@  @@@@@@@    @@@@@@   @@@@@@@@@@   
+@@@@@@@   @@@@@@@@  @@@@ @@@  @@@@@@@@@  @@@@@@@@  @@@@@@@@  @@@@@@@@@@@  
+!@@       @@!  @@@  @@!@!@@@  !@@        @@!  @@@  @@!  @@@  @@! @@! @@!  
+!@!       !@!  @!@  !@!!@!@!  !@!        !@!  @!@  !@!  @!@  !@! !@! !@!  
+!!@@!!    @!@!@!@!  @!@ !!@!  !@! @!@!@  @!@!!@!   @!@!@!@!  @!! !!@ @!@  
+ !!@!!!   !!!@!!!!  !@!  !!!  !!! !!@!!  !!@!@!    !!!@!!!!  !@!   ! !@!  
+     !:!  !!:  !!!  !!:  !!!  :!!   !!:  !!: :!!   !!:  !!!  !!:     !!:  
+    !:!   :!:  !:!  :!:  !:!  :!:   !::  :!:  !:!  :!:  !:!  :!:     :!:  
+:::: ::   ::   :::   ::   ::   ::: ::::  ::   :::  ::   :::  :::     ::   
+:: : :     :   : :  ::    :    :: :: :    :   : :   :   : :   :      :    
+`
+                                                                           
 const initialLines = [
+  { type: 'output', text: bannerText},
+  { type: 'output', text: 'Sangram Barge - Software Engineer' },
   { type: 'output', text: 'Welcome to whoami.dev — press Enter to start typing.' },
   { type: 'output', text: "Type 'help' to see commands." }
 ]
@@ -33,17 +48,18 @@ export default function Terminal() {
     }
 
     if (base === 'about') {
-      setTimeout(() => setLines(prev => [...prev, { type: 'output', text: "Hi — I'm [Your Name]. I'm a dev who builds things. (replace this text)" }]), 200)
+      setTimeout(() => setLines(prev => [...prev, { type: 'output', text: "Hi — I'm Sangram. I'm a dev who builds things." }]), 200)
       return
     }
 
+    // ToDo fetch projects from github and display links here
     if (base === 'projects') {
       setTimeout(() => setLines(prev => [...prev, { type: 'output', text: "- Project A: https://github.com/you/project-a\n- Project B: https://github.com/you/project-b" }]), 200)
       return
     }
 
     if (base === 'contact') {
-      setTimeout(() => setLines(prev => [...prev, { type: 'output', text: "Email: you@example.com — or visit /contact" }]), 200)
+      setTimeout(() => setLines(prev => [...prev, { type: 'output', text: "Email: sangrambarge098@gmail.com" }]), 200)
       return
     }
 
@@ -52,6 +68,7 @@ export default function Terminal() {
       return
     }
 
+    // ToDo link resume
     if (base === 'resume') {
       setTimeout(() => setLines(prev => [...prev, { type: 'output', text: 'Resume: https://link-to-resume' }]), 200)
       return
