@@ -3,17 +3,34 @@ on:
   push:
     branches: [ main ]
 
+# Grant explicit permissions so the job can push to gh-pages
+permissions:
+  contents: write       # required to push commit
+  pages: write          # (optional) for Pages related APIs
+  id-token: write       # (optional) for OIDC if you use it
+
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          # persist-credentials defaults to true (keeps GITHUB_TOKEN for push)
+          # persist-credentials: true
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - run: npm ci
-      - run: npm run build
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
         with:
